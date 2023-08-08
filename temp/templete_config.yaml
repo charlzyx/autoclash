@@ -23,10 +23,7 @@ external-controller: "0.0.0.0:9090"
 secret: ""
 # 您可以将静态网页资源（如 clash-dashboard）放置在一个目录中，clash 将会服务于 `RESTful API/ui`
 # 参数应填写配置目录的相对路径或绝对路径。
-external-ui: /data/clash/dashboard
-# tpclash 从 v0.0.16 版本开始支持 Clash Meta 分支版本, Meta 用户需要在配置文件中关闭 iptables 配置, 其他配置与默认的 Permium 版本相同:
-iptables:
-  enable: false
+external-ui: /data/clash/yacd
 
 # 需要开启 TUN 配置
 tun:

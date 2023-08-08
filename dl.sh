@@ -150,4 +150,4 @@ cat $Temp_Dir/proxy.txt >> $Temp_Dir/config.yaml
 \cp $Temp_Dir/config.yaml $Conf_Dir/
 # Configure Clash Dashboard
 
-\cp $Conf_Dir/config.yaml /etc/clash/clash.yaml
+\cp $Conf_Dir/config.yaml /etc/clash.yaml
