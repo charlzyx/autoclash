@@ -164,7 +164,7 @@ check_tpclash_service() {
 install_tpclash() {
 	wget https://github.com/mritd/tpclash/releases/download/v0.1.11/tpclash-premium-linux-amd64
 	mv tpclash-premium-linux-amd64 /opt/tpclash
-	chmod /opt/tpclash
+	chmod +x /opt/tpclash
 	/opt/tpclash install
 }
 
@@ -174,7 +174,7 @@ tpclash_status=$(check_tpclash_service)
 # 根据返回值进行相应操作
 if [ "$tpclash_status" == "yes_tpclash" ]; then
     echo "tpclash 已经存在跳过下载"
-elif [ "$tpclash_status" == "notpclash" ]; then
+elif [ "$tpclash_status" == "no_tpclash" ]; then
     echo "tpclash 不存在,开始下载..."
 		install_tpclash
 elif [ "$tpclash_status" == "no_systemctl" ]; then
