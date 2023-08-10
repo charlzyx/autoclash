@@ -8,15 +8,6 @@
 # 获取脚本工作目录绝对路径
 export Server_Dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
-if [ -z "$1" ]; then
-    echo "请提供 CLASH 订阅地址"
-		exit 0
-else
-    # echo ""
-fi
-# 加载.env变量文件
-source $Server_Dir/.env
-
 # 给二进制启动程序、脚本等添加可执行权限
 chmod +x $Server_Dir/scripts/*
 chmod +x $Server_Dir/tools/subconverter/subconverter
@@ -28,13 +19,11 @@ Conf_Dir="$Server_Dir/conf"
 Temp_Dir="$Server_Dir/temp"
 Log_Dir="$Server_Dir/logs"
 
-# 将 CLASH_URL 变量的值赋给 URL 变量，并检查 CLASH_URL 是否为空
-URL=${CLASH_URL:?Error: CLASH_URL variable is not set or empty}
+# 将 第一个参数作为 CLASH_URL 变量的值赋给 URL 变量，并检查 CLASH_URL 是否为空
+URL=${$1:?Error: CLASH_URL variable is not set or empty}
 
 # 获取 CLASH_SECRET 值，如果不存在则生成一个随机数
 Secret=${CLASH_SECRET:-$(openssl rand -hex 32)}
-
-
 
 #################### 函数定义 ####################
 
