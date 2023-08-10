@@ -150,20 +150,17 @@ cat $Temp_Dir/proxy.txt >> $Temp_Dir/config.yaml
 
 #################### TPCLASH ####################
 check_tpclash_service() {
-    if command -v systemctl &> /dev/null; then
-        if systemctl list-unit-files --type=service | grep -q '^tpclash\.service'; then
-            echo "yes_tpclash"
-        else
-            echo "no_tpclash"
-        fi
-    else
-        echo "no_systemctl 命令不可用，无法检查 tpclash 服务。"
-    fi
+		if systemctl list-unit-files --type=service | grep -q '^tpclash\.service'; then
+				echo "yes_tpclash"
+		else
+				echo "no_tpclash"
+		fi
 }
 
 install_tpclash() {
-	wget https://github.com/mritd/tpclash/releases/download/v0.1.11/tpclash-premium-linux-amd64
-	mv tpclash-premium-linux-amd64 /opt/tpclash
+
+	wget https://github.com/mritd/tpclash/releases/download/v0.1.12/tpclash-meta-linux-amd64-compatible
+	mv tpclash-meta-linux-amd64-compatible /opt/tpclash
 	chmod +x /opt/tpclash
 	/opt/tpclash install
 }
@@ -173,7 +170,8 @@ tpclash_status=$(check_tpclash_service)
 
 # 根据返回值进行相应操作
 if [ "$tpclash_status" == "yes_tpclash" ]; then
-    echo "tpclash 已经存在跳过下载"
+    echo "tpclash 已经重启服务"
+		systemctl restart tpclash
 elif [ "$tpclash_status" == "no_tpclash" ]; then
     echo "tpclash 不存在,开始下载..."
 		install_tpclash
