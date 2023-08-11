@@ -34,9 +34,8 @@ iptables:
 tun:
   enable: true
   stack: system
-  dns-hijack:
+  # dns-hijack:
   #   - any:53
-    - 127.0.0.1:3053
   #   - 8.8.8.8:53
   #   - tcp://8.8.8.8:53
   auto-route: true
