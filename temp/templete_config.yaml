@@ -34,10 +34,6 @@ iptables:
 tun:
   enable: true
   stack: system
-  # dns-hijack:
-  #   - any:53
-  #   - 8.8.8.8:53
-  #   - tcp://8.8.8.8:53
   auto-route: true
   auto-redir: true
   auto-detect-interface: true
@@ -50,7 +46,16 @@ dns:
   fake-ip-range: 198.18.0.1/16
   default-nameserver:
     - 127.0.0.1:3053
-    - 223.5.5.5
+  # 指定解析国内域名时使用的加密 DNS 服务器地址：
   nameserver:
     - 127.0.0.1:3053
-    - 223.5.5.5
+  # 指定解析国外域名时使用的加密 DNS 服务器地址，并设置分流规则：
+  fallback:
+     - 1.1.1.1
+     - 8.8.8.8
+  fallback-filter:
+     geoip: true
+     geoip-code: CN
+     ipcidr:
+       - 240.0.0.0/4
+       - 119.119.119.0/24
