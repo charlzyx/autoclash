@@ -15,7 +15,7 @@ mode: rule
 
 # 设置日志输出级别 (默认级别：silent，即不输出任何内容，以避免因日志内容过大而导致程序内存溢出）。
 # 5 个级别：silent / info / warning / error / debug。级别越高日志输出量越大，越倾向于调试，若需要请自行开启。
-log-level: info
+log-level: error
 # Clash 的 RESTful API
 external-controller: "0.0.0.0:9090"
 
@@ -34,6 +34,10 @@ iptables:
 tun:
   enable: true
   stack: system
+  # dns-hijack:
+  #   - any:53
+  #   - 8.8.8.8:53
+  #   - tcp://8.8.8.8:53
   auto-route: true
   auto-redir: true
   auto-detect-interface: true
@@ -46,9 +50,11 @@ dns:
   fake-ip-range: 198.18.0.1/16
   default-nameserver:
     - 127.0.0.1:3053
+    - 223.5.5.5
   # 指定解析国内域名时使用的加密 DNS 服务器地址：
   nameserver:
     - 127.0.0.1:3053
+    - 223.5.5.5
   # 指定解析国外域名时使用的加密 DNS 服务器地址，并设置分流规则：
   fallback:
      - 1.1.1.1
